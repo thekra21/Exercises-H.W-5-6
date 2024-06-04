@@ -2,6 +2,7 @@ package org.example.Control;
 
 import org.example.dao.JobsDAO;
 import jakarta.ws.rs.*;
+import org.example.dto.JobsFileDto;
 import org.example.models.Jobs;
 
 import java.util.ArrayList;
@@ -13,13 +14,15 @@ public class JobsController {
 
     @GET
     public ArrayList<Jobs> getAllJobs(
-            @QueryParam("minSalary")Double minSalary ,
-            @QueryParam("limit")Integer limit,
-            @QueryParam("offset")int offset
+//            @QueryParam("minSalary")Double minSalary ,
+//            @QueryParam("limit")Integer limit,
+//            @QueryParam("offset")int offset
+
+            @BeanParam JobsFileDto Fliter
     ) {
 
         try {
-            return dao.selectAllJobs(minSalary,limit,offset);
+            return dao.selectAllJobs(Fliter);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -69,4 +72,5 @@ public class JobsController {
             throw new RuntimeException(e);
         }
     }
+
 }
