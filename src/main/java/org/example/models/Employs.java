@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class Employs {
 
-private int employees_id;
+private int employee_id;
 private String first_name;
 private String last_name;
 private String email;
@@ -13,11 +13,14 @@ private String phone_number;
 private String hire_date;
 private int job_id;
 private double salary;
-private int manger_id;
+private int manager_id;
 private int department_id;
 
-    public Employs(int employees_id, String first_name, String last_name, String email, String phone_number, String hire_date, int job_id, double salary, int manger_id, int department_id) {
-        this.employees_id = employees_id;
+    public Employs() {
+    }
+
+    public Employs(int employee_id, String first_name, String last_name, String email, String phone_number, String hire_date, int job_id, double salary, int manager_id, int department_id) {
+        this.employee_id = employee_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
@@ -25,13 +28,13 @@ private int department_id;
         this.hire_date = hire_date;
         this.job_id = job_id;
         this.salary = salary;
-        this.manger_id = manger_id;
+        this.manager_id = manager_id;
         this.department_id = department_id;
     }
 
     public Employs(ResultSet rs) throws SQLException {
 
-        employees_id = rs.getInt("employees_id");
+        employee_id = rs.getInt("employee_id");
         first_name= rs.getString("first_name");
         last_name=rs.getString("last_name");
         email=rs.getString("email");
@@ -39,7 +42,7 @@ private int department_id;
         hire_date=rs.getString("hire_date");
         job_id=rs.getInt("job_id");
         salary=rs.getDouble("salary");
-        manger_id=rs.getInt("manger_id");
+        manager_id=rs.getInt("manager_id");
         department_id=rs.getInt("department_id");
 
 
@@ -48,7 +51,7 @@ private int department_id;
     @Override
     public String toString() {
         return "Employs{" +
-                "employee_id=" + employees_id +
+                "employee_id=" + employee_id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
@@ -56,17 +59,17 @@ private int department_id;
                 ", hire_date='" + hire_date + '\'' +
                 ", job_id=" + job_id +
                 ", salary=" + salary +
-                ", manger_id=" + manger_id +
+                ", manager_id=" + manager_id +
                 ", department_id=" + department_id +
                 '}';
     }
 
     public int getEmployee_id() {
-        return employees_id;
+        return employee_id;
     }
 
     public void setEmployee_id(int employee_id) {
-        this.employees_id = employee_id;
+        this.employee_id = employee_id;
     }
 
     public String getFirst_name() {
@@ -125,12 +128,12 @@ private int department_id;
         this.salary = salary;
     }
 
-    public int getManger_id() {
-        return manger_id;
+    public int getManager_id() {
+        return manager_id;
     }
 
-    public void setManger_id(int manger_id) {
-        this.manger_id = manger_id;
+    public void setManager_id(int manger_id) {
+        this.manager_id = manger_id;
     }
 
     public int getDepartment_id() {

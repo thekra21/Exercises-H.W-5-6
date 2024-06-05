@@ -1,49 +1,58 @@
 package org.example.Control;
 
+import jakarta.ws.rs.core.MediaType;
 import org.example.dao.EmploysDAO;
 
 import jakarta.ws.rs.*;
 import org.example.models.Employs;
 
 import java.util.ArrayList;
+@Path("/employees")
 
 public class EmployController {
 
     EmploysDAO dao = new EmploysDAO();
 
     @GET
-    public ArrayList<Employs> getAllJobs() {
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public ArrayList<Employs> getAllEmployees(
+            @QueryParam("employee_id")Integer employee_id ,
+            @QueryParam("limit")Integer limit,
+            @QueryParam("offset")int offset
+    ) {
 
         try {
-            return dao.selectAllEmploys();
+            return dao.selectAllEmploys(employee_id,limit,offset);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @GET
-    @Path("{employId}")
-    public Employs getEmploy(@PathParam("employId") int employId) {
+    @Path("{employee_id}")
+    public Employs getEmploy(@PathParam("employee_id") int employee_id) {
 
         try {
-            return dao.selectEmployees(employId);
+            return dao.selectEmployees(employee_id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @DELETE
-    @Path("{employId}")
-    public void deleteEmploys(@PathParam("employId") int employId) {
+    @Path("{employee_id}")
+    public void deleteEmployees(@PathParam("employee_id") int employee_id) {
 
         try {
-            dao.deleteEmployees(employId);
+            dao.deleteEmployees(employee_id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @POST
+
+//    @Consumes(MediaType.APPLICATION_XML)
     public void insertEmploys(Employs employs) {
 
         try {
@@ -55,15 +64,19 @@ public class EmployController {
     }
 
     @PUT
-    @Path("{employId}")
-    public void updateEmploys(@PathParam("employId") int employId, Employs employs) {
+    @Path("{employee_id}")
+    public void updateEmploys(@PathParam("employee_id") int employee_id, Employs employs) {
 
         try {
-            employs.setEmployee_id(employId);
+            employs.setEmployee_id(employee_id);
             dao.updateEmplyees(employs);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+
+
+
 }
